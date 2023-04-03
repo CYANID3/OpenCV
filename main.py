@@ -25,6 +25,8 @@ while True:
     for (x,y,w,h) in faces:
         # Рисуем прямоугольную рамку вокруг лица
         cv2.rectangle(frame,(x,y),(x+w,y+h),(255,0,0),2)
+        # Добавляем текст "Face" рядом с прямоугольником
+        cv2.putText(frame, "Face", (x, y-10), cv2.FONT_HERSHEY_SIMPLEX, 0.9, (255,0,0), 2)
 
         # Обрезаем кадр, чтобы распознать улыбку только на лице
         roi_gray = gray[y:y+h, x:x+w]
@@ -37,6 +39,8 @@ while True:
         for (sx,sy,sw,sh) in smiles:
             # Рисуем прямоугольную рамку вокруг улыбки
             cv2.rectangle(roi_color,(sx,sy),(sx+sw,sy+sh),(0,255,0),2)
+             # Добавляем текст "Smile" рядом с прямоугольником
+            cv2.putText(frame, "Smile", (x + sx, y + sy - 10), cv2.FONT_HERSHEY_SIMPLEX, 0.7, (0, 255, 0), 2)
 
     # Отображаем кадр с лицами и улыбками
     cv2.imshow('Facial Recognition', frame)
